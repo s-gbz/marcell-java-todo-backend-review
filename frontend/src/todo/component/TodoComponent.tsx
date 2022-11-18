@@ -13,10 +13,7 @@ export default function TodoComponent(props: TodoComponentProps){
                     #{props.todo.id} - Open
                 </div>
                 <div className={"card-body"}>
-                    <div className={"row"}>
-                        <div className={"col-1"}>
-                            <input type={"checkbox"}/>
-                        </div>
+                    <div className={""}>
                         <div className={"col"}>
                             <blockquote className={"blockquote mb-0"}>
                                 <p>{props.todo.description}</p>
@@ -26,8 +23,8 @@ export default function TodoComponent(props: TodoComponentProps){
                     </div>
                 </div>
                 <div className={"card-footer"}>
-                    <div className={"row"}>
-                        <div className={"col-1"}>
+                    <div className={""}>
+                        <div className={""}>
                             <button className={"btn btn-danger"}>Delete</button>
                         </div>
                         <div className={"col"}>
@@ -44,10 +41,7 @@ export default function TodoComponent(props: TodoComponentProps){
                     #{props.todo.id} - In Progress
                 </div>
                 <div className={"card-body"}>
-                    <div className={"row"}>
-                        <div className={"col-1"}>
-                            <input type={"checkbox"}/>
-                        </div>
+                    <div className={""}>
                         <div className={"col"}>
                             <blockquote className={"blockquote mb-0"}>
                                 <p>{props.todo.description}</p>
@@ -76,9 +70,6 @@ export default function TodoComponent(props: TodoComponentProps){
                 </div>
                 <div className={"card-body"}>
                     <div className={"row"}>
-                        <div className={"col-1"}>
-                            <input type={"checkbox"}/>
-                        </div>
                         <div className={"col"}>
                             <blockquote className={"blockquote mb-0"}>
                                 <p>{props.todo.description}</p>

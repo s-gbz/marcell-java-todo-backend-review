@@ -10,7 +10,7 @@ export default function AddTodo(){
     }
 
     const addTodo = () => {
-        axios.post('/api/todo', {
+        const toAdd =axios.post('/api/todo', {
             id: '',
             description: input,
             status: "OPEN"
@@ -21,6 +21,7 @@ export default function AddTodo(){
             .catch(function (error){
                 console.log(error)
             })
+        return toAdd
     }
 
     return(
