@@ -11,8 +11,7 @@ export default function TodoApp(){
 
     const [searchText, setSearchText] = useState("")
 
-    const filteredTodos = todos.filter(todo => todo.description.toLowerCase().includes(searchText.toLowerCase()) || todo.status.toLowerCase().includes(searchText.toLowerCase())
-    )
+    const filteredTodos = todos.filter(todo => todo.description.toLowerCase().includes(searchText.toLowerCase()) || todo.status.toLowerCase().includes(searchText.toLowerCase()))
 
     function handleSearchTextChange(toSearch: string){
         setSearchText(toSearch)
