@@ -24,9 +24,9 @@ export default function AddTodo(){
     }
 
     return(
-        <div>
-            <input onChange={saveInput} placeholder={"What do you need to do?"}/>
-            <button className={"btn btn-info"} onClick={addTodo}>Add Todo</button>
+        <div className="input-group mb-3">
+            <input type="text" className="form-control" placeholder="What do you need to do?" aria-label="What do you need to do?" aria-describedby="button-addon2" onChange={saveInput} />
+            <button className="btn btn-secondary" type="button" id="button-addon2" onClick={addTodo}>Button</button>
         </div>
     )
 }
