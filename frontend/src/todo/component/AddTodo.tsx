@@ -10,24 +10,32 @@ export default function AddTodo(){
     }
 
     const addTodo = () => {
-        const toAdd =axios.post('/api/todo', {
+        return axios.post('/api/todo', {
             id: '',
             description: input,
             status: "OPEN"
         })
-            .then(function (response){
+            .then(function (response) {
                 console.log(response)
             })
-            .catch(function (error){
+            .catch(function (error) {
                 console.log(error)
             })
-        return toAdd
     }
 
     return(
         <div className="input-group mb-3">
-            <input type="text" className="form-control" placeholder="What do you need to do?" aria-label="What do you need to do?" aria-describedby="button-addon2" onChange={saveInput} />
-            <button className="btn btn-secondary" type="button" id="button-addon2" onClick={addTodo}>Button</button>
+            <input
+                id={"inputAddTodo"}
+                type="text"
+                className="form-control"
+                placeholder="What do you need to do?"
+                aria-label="What do you need to do?"
+                aria-describedby="addTodo"
+                onChange={saveInput}
+                onKeyUp={(event) => {if(event.key === "Enter"){addTodo().then(r => console.log(r))}}}
+            />
+            <button className="btn btn-secondary" type="button" id="addTodo" onClick={addTodo}>Button</button>
         </div>
     )
 }
