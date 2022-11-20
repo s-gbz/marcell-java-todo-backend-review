@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import TodoList from "./components/TodoList";
-import {getAllTodos, postTodo, deleteTodo, updateTodo} from "./service/todo-api-service";
+import {getAllTodos, postTodo, deleteTodo, putTodo} from "./service/todo-api-service";
 import {Todo} from "./components/Todo";
 import AddTodo from "./components/AddTodo";
 import SearchTodo from "./components/SearchTodo";
@@ -47,8 +47,8 @@ export default function TodoApp(){
             })
     }
 
-    const updateTodoById = (id: string, description: string, status: string) => {
-        updateTodo(id, description, status)
+    const updateTodoById = (todo: Todo) => {
+        putTodo(todo)
             .then(() => getAllTodos())
             .then(todos => setTodo(todos))
             .then(response => console.log(response))
@@ -58,7 +58,7 @@ export default function TodoApp(){
     return (
         <div className={"container-lg "}>
             <SearchTodo searchTodo={handleSearchTextChange}/>
-            <TodoList updateTodo={() => updateTodoById} todos={filteredTodos} deleteTodo={deleteTodoById} />
+            <TodoList todos={filteredTodos} deleteTodo={deleteTodoById} />
             <AddTodo addTodo={addTodo} />
         </div>
     )
