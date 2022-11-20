@@ -47,8 +47,8 @@ export default function TodoApp(){
             })
     }
 
-    const updateTodoById = (todo: Todo) => {
-        putTodo(todo)
+    const updateTodoById = (id: string, description: string, status: string) => {
+        putTodo(id, description, status)
             .then(() => getAllTodos())
             .then(todos => setTodo(todos))
             .then(response => console.log(response))
@@ -58,7 +58,7 @@ export default function TodoApp(){
     return (
         <div className={"container-lg "}>
             <SearchTodo searchTodo={handleSearchTextChange}/>
-            <TodoList todos={filteredTodos} deleteTodo={deleteTodoById} />
+            <TodoList updateTodo={updateTodoById} todos={filteredTodos} deleteTodo={deleteTodoById} />
             <AddTodo addTodo={addTodo} />
         </div>
     )
