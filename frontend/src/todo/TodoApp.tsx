@@ -1,11 +1,20 @@
 import React, {useEffect, useState} from "react";
 import TodoList from "./components/TodoList";
-import {getAllTodos, postTodo, deleteTodo, updateTodo, getTodoById} from "./service/todo-api-service";
+import {getAllTodos, postTodo, deleteTodo, updateTodo} from "./service/todo-api-service";
 import {Todo} from "./components/Todo";
 import AddTodo from "./components/AddTodo";
+import SearchTodo from "./components/SearchTodo";
 export default function TodoApp(){
 
     const [todos, setTodo] = useState<Todo[]>([])
+
+    const [searchText, setSearchText] = useState("")
+
+    const filteredTodos = todos.filter(todo => todo.description.toLowerCase().includes(searchText.toLowerCase()) || todo.status.toLowerCase().includes(searchText.toLowerCase()))
+
+    function handleSearchTextChange(toSearch: string){
+        setSearchText(toSearch)
+    }
 
     useEffect(() => {
         getAllTodos()
@@ -42,13 +51,15 @@ export default function TodoApp(){
         updateTodo(id, description, status)
             .then(() => getAllTodos())
             .then(todos => setTodo(todos))
+            .then(response => console.log(response))
             .catch(error => console.log(error))
     }
 
     return (
         <div className={"container-lg "}>
-            <TodoList updateTodo={updateTodoById} todos={todos} deleteTodo={deleteTodoById}/>
-            <AddTodo addTodo={addTodo}/>
+            <SearchTodo searchTodo={handleSearchTextChange}/>
+            <TodoList updateTodo={() => updateTodoById} todos={filteredTodos} deleteTodo={deleteTodoById} />
+            <AddTodo addTodo={addTodo} />
         </div>
     )
 }

@@ -9,14 +9,22 @@ type TodoComponentProps = {
 
 export default function TodoComponent(props:TodoComponentProps){
 
-    const [update, setUpdate] = useState("")
+    const [newStatus, setNewStatus] = useState("")
+    const saveStatus = (event: ChangeEvent<HTMLSelectElement>) => {
+        setNewStatus(event.target.value)
+    }
+
+    const [newDescription, setNewDescription] = useState("")
+    const saveNewDescription = (event: ChangeEvent<HTMLInputElement>) => {
+        setNewDescription(event.target.value)
+    }
 
     function handleDeleteButton(){
         props.deleteTodo(props.todo.id)
     }
 
     function handleUpdateButton(){
-        props.updateTodo(props.todo.id, props.todo.description, props.todo.status)
+        props.updateTodo(props.todo.id, newDescription, newStatus)
     }
 
     return (
@@ -39,14 +47,13 @@ export default function TodoComponent(props:TodoComponentProps){
                                 <div className="modal-dialog">
                                     <div className="modal-content">
                                         <div className="modal-header">
-                                            <h1 className="modal-title fs-5" id="updateTodoTitle">Modal title</h1>
+                                            <h1 className="modal-title fs-5" id="updateTodoTitle">Update Todo: {props.todo.id}</h1>
                                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div className="modal-body">
                                             <div className="input-group mb-3">
                                                 <label className="input-group-text" htmlFor="updateStatus">Status</label>
-                                                <select className="form-select" id="updateStatus">
-                                                    <option selected>Choose...</option>
+                                                <select className="form-select" id="updateStatus" onChange={saveStatus} defaultValue={props.todo.status}>
                                                     <option value="OPEN">OPEN</option>
                                                     <option value="IN_PROGRESS">IN_PROGRESS</option>
                                                     <option value="DONE">DONE</option>
@@ -54,12 +61,12 @@ export default function TodoComponent(props:TodoComponentProps){
                                             </div>
                                             <div className="input-group mb-3">
                                                 <label className="input-group-text" htmlFor="updateDescription">Description</label>
-                                                <input type="text" className="form-control" placeholder="What do you need to do?" aria-label="Description" aria-describedby="updateDescription" />
+                                                <input type="text" className="form-control" placeholder={props.todo.description} aria-label="Description" aria-describedby="updateDescription" onChange={saveNewDescription} />
                                             </div>
                                         </div>
                                         <div className="modal-footer">
                                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                            <button type="button" className="btn btn-primary">Save changes</button>
+                                            <button type="button" className="btn btn-primary" onClick={handleUpdateButton}>Save changes</button>
                                         </div>
                                     </div>
                                 </div>
