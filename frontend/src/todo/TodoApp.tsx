@@ -1,13 +1,12 @@
 import React, {useEffect, useState} from "react";
-import TodoList from "./component/TodoList";
-import axios from "axios";
-import {Todo} from "./model/Todo";
-import AddTodo from "./component/AddTodo";
-import SearchTodo from "./component/SearchTodo";
-
+import TodoList from "./components/TodoList";
+import {getAllTodos, postTodo, deleteTodo, putTodo} from "./service/todo-api-service";
+import {Todo} from "./components/Todo";
+import AddTodo from "./components/AddTodo";
+import SearchTodo from "./components/SearchTodo";
 export default function TodoApp(){
 
-    const [todos, setTodos] = useState<Todo[]>([])
+    const [todos, setTodo] = useState<Todo[]>([])
 
     const [searchText, setSearchText] = useState("")
 
@@ -18,21 +17,49 @@ export default function TodoApp(){
     }
 
     useEffect(() => {
-        getTodos()
+        getAllTodos()
+            .then(todos => setTodo(todos))
+            .then(response => console.log(response))
+            .catch(error => console.log(error))
     }, [])
 
-    function getTodos(){
-        axios.get('/api/todo')
-            .then((response) => {
-                console.log(response.data)
-                setTodos(response.data)
+    const addTodo = (description: string) => {
+        postTodo(description)
+            .then(() => getAllTodos())
+            .then(todos => setTodo(todos))
+            .then(function (response){
+                console.log(response)
+            })
+            .catch(function (error){
+                console.log(error)
             })
     }
-    return(
-        <div className={"container mt-3"}>
-            <SearchTodo handleSearchTextChange={handleSearchTextChange}/>
-            <TodoList todos={filteredTodos} />
-            <AddTodo />
+
+    const deleteTodoById = (id: string) => {
+        deleteTodo(id)
+            .then(() => getAllTodos())
+            .then(todos => setTodo(todos))
+            .then(function (response){
+                console.log(response)
+            })
+            .then(function (error){
+                console.log(error)
+            })
+    }
+
+    const updateTodoById = (id: string, description: string, status: string) => {
+        putTodo(id, description, status)
+            .then(() => getAllTodos())
+            .then(todos => setTodo(todos))
+            .then(response => console.log(response))
+            .catch(error => console.log(error))
+    }
+
+    return (
+        <div className={"container-lg "}>
+            <SearchTodo searchTodo={handleSearchTextChange}/>
+            <TodoList updateTodo={updateTodoById} todos={filteredTodos} deleteTodo={deleteTodoById} />
+            <AddTodo addTodo={addTodo} />
         </div>
     )
 }
