@@ -4,7 +4,6 @@ import {Todo} from "./Todo";
 type TodoComponentProps = {
     todo: Todo
     deleteTodo(id: string): void
-    updateTodo(id: string, description: string, status: string): void
 }
 
 export default function TodoComponent(props:TodoComponentProps){
@@ -16,10 +15,6 @@ export default function TodoComponent(props:TodoComponentProps){
 
     function handleDeleteButton(){
         props.deleteTodo(props.todo.id)
-    }
-
-    function handleUpdateButton(){
-        props.updateTodo(props.todo.id, newDescription, props.todo.status)
     }
 
     if(props.todo.status === "OPEN"){
@@ -63,7 +58,7 @@ export default function TodoComponent(props:TodoComponentProps){
                                             </div>
                                             <div className="modal-footer">
                                                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                <button type="button" className="btn btn-primary" onClick={handleUpdateButton}>Save changes</button>
+                                                <button type="button" className="btn btn-primary">Save changes</button>
                                             </div>
                                         </div>
                                     </div>

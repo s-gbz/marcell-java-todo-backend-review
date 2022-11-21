@@ -58,7 +58,7 @@ export default function TodoApp(){
     return (
         <div className={"container-lg "}>
             <SearchTodo searchTodo={handleSearchTextChange}/>
-            <TodoList updateTodo={updateTodoById} todos={filteredTodos} deleteTodo={deleteTodoById} />
+            <TodoList todos={filteredTodos} deleteTodo={deleteTodoById} />
             <AddTodo addTodo={addTodo} />
         </div>
     )
