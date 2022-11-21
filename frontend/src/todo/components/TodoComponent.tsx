@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from "react";
+import React from "react";
 import {Todo} from "./Todo";
 
 type TodoComponentProps = {
@@ -7,11 +7,6 @@ type TodoComponentProps = {
 }
 
 export default function TodoComponent(props:TodoComponentProps){
-
-    const [newDescription, setNewDescription] = useState("")
-    const saveNewDescription = (e: ChangeEvent<HTMLInputElement>) => {
-        setNewDescription(e.target.value)
-    }
 
     function handleDeleteButton(){
         props.deleteTodo(props.todo.id)
@@ -45,7 +40,7 @@ export default function TodoComponent(props:TodoComponentProps){
                                                 <div className="input-group mb-3">
                                                     <span className="input-group-text" id="updateDescriptionInput">Description</span>
                                                     <input type="text" className="form-control" placeholder={props.todo.description}
-                                                           aria-label="Description" aria-describedby="basic-addon1" onChange={saveNewDescription} />
+                                                           aria-label="Description" aria-describedby="basic-addon1" />
                                                 </div>
                                                 <div className="input-group mb-3">
                                                     <span className="input-group-text" id="updateDescriptionInput">Status</span>
@@ -58,7 +53,7 @@ export default function TodoComponent(props:TodoComponentProps){
                                             </div>
                                             <div className="modal-footer">
                                                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                <button type="button" className="btn btn-primary">Save changes</button>
+                                                <button type="button" className="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
                                             </div>
                                         </div>
                                     </div>
