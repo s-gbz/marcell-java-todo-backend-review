@@ -6,16 +6,19 @@ import AddTodo from "./components/AddTodo";
 import SearchTodo from "./components/SearchTodo";
 export default function TodoApp(){
 
+    // Zwei States, elegant, kurz und knapp :)
     const [todos, setTodo] = useState<Todo[]>([])
-
     const [searchText, setSearchText] = useState("")
 
+    // Sogar mit Suche nach Status - very nice
     const filteredTodos = todos.filter(todo => todo.description.toLowerCase().includes(searchText.toLowerCase()) || todo.status.toLowerCase().includes(searchText.toLowerCase()))
 
+    // handle Schreibweise ist sehr gut
     function handleSearchTextChange(toSearch: string){
         setSearchText(toSearch)
     }
 
+    // Hier hatten wir ja gestern festgestellt das in Z24 noch ein return nötig ist, um in Z25 die Response weiterverarbeiten zu können
     useEffect(() => {
         getAllTodos()
             .then(todos => setTodo(todos))
